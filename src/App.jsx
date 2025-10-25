@@ -1,28 +1,42 @@
-import { useState } from 'react'
+import { useEffect } from 'react';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import About from './components/About';
+import WhyChooseUs from './components/WhyChooseUs';
+import Services from './components/Services';
+import Posts from './components/Posts';
+import Clients from './components/Clients';
+import Newsletter from './components/Newsletter';
+import Contact from './components/Contact';
+import SocialLinks from './components/SocialLinks';
+import Footer from './components/Footer';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <div className="min-h-screen bg-white text-slate-900 antialiased">
+      <Header />
+      <main id="home" className="flex flex-col">
+        <Hero />
+        <div className="relative z-10">{/* content sections */}
+          <About />
+          <WhyChooseUs />
+          <Services />
+          <Posts />
+          <Clients />
+          <Newsletter />
+          <SocialLinks />
+          <Contact />
         </div>
-      </div>
+      </main>
+      <Footer />
     </div>
-  )
+  );
 }
-
-export default App
